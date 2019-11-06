@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 5px solid #008cba; border-top-left-radius: 10%; border-top-right-radius: 10%; }
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 3px solid #008cba;
+  box-sizing: border-box;
+  font-size: 17px;
+}
+
+button {
+  background-color: #febb11;
+  color: white;
+  padding: 14px 20px;
+  margin: 10px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: 25px;
+}
+
+button:hover {
+  background-color: #008cba;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 2px 5px;
+  background-color: red;
+  font-size: 20px;
+
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 10px 0 8px 0;
+}
+
+img.avatar {
+  width: 60%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 9px;
+ 
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+  background-color: #febb11;
+  color:white;
+  text-decoration: none;
+}
+
+
+body {
+  background-image: url('https://images7.alphacoders.com/413/thumb-1920-413186.jpg');
+  background-repeat: no-repeat;
+
+  background-size: cover;
+
+  padding-left: 38%;
+  padding-top: 5%;
+}
+
+#parent {
+   display: table;
+   height: 400px;
+   width: 400px;
+   background-color: white;
+   border-top-left-radius: 10%;
+   border-top-right-radius: 10%;
+
+}
+#form_login {
+   display: table-cell;
+   
+   vertical-align: middle;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="parent">
+  
+  <form action="/" method="post">
+  <div class="imgcontainer">
+    <img src="https://www.gestaomais.net.br/javax.faces.resource/avatarV01.png.jsf?ln=imagens" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+    <p id="mensagem"></p>
+    <label for="uname"><b>Usuário</b></label>
+    <input type="text" placeholder="Fernando" name="usuario[email]">
+
+    <label for="psw"><b>Senha</b></label>
+    <input type="password" placeholder="123456" name="usuario[senha]" >
+        
+    <button type="submit">Entrar</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Lembrar-me
+    </label>
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Esqueci a senha!</button>
+  
+  </div>
+</form>
+
+</div>
+
+</body>
+</html>

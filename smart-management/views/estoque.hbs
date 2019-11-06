@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CPE - Consultoria em Projetos de Estoque</title>
+<link rel="stylesheets" href="style.sass">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+  <div class="menu-bar">
+<ul>
+  <li><a href="home"><i class="fas fa-columns"></i>  Home</a></li>
+  <li class="active"><a href="estoque"><i class="fas fa-cubes"></i>  Estoque</a>
+    <div class="sub-menu-1">
+      <ul>
+          <li><a href="saida">Saida</a></li>
+          <li><a href="entrada">Entrada</a></li>
+      </ul>
+  </div>
+  </li>
+  
+  </li>
+  <li><a href="cadastro"><i class="fas fa-users"></i></i>  Cadastro</a></li>
+</ul>
+</div>
+</body>
+</html>
+</script>
+
+<br></br>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.dropbtn {
+  background-color: #febb11;
+  color: black;
+  padding: 30px;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10%
+  
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color:antiquewhite;
+}
+
+#myInput {
+  box-sizing: border-box;
+  background-image: url('searchicon.png');
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 14px 20px 12px 45px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  margin: 10px;
+}
+
+#myInput:focus {outline: 3px solid #ddd;}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #febb11;
+  min-width: 230px;
+  overflow: auto;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 16px 15px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+h2 {
+  position: absolute;
+  left: 135px;
+  top:150px;
+  color: antiquewhite;
+}
+
+
+.div2 {
+  width: 70px;
+  height: 360px;  
+  padding: 172px;
+  position:fixed;
+  left:70px;
+  top:140px;
+  border: 3px solid #febb11;
+}
+
+.dropdown
+{
+position: absolute;
+  left: 167px;
+  top:200px;
+}
+
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #febb11;
+  font-weight: 700;
+
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color:  #febb11;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.myForm button {
+padding: 1.5em;
+border-radius: 1.5em;
+background:  #febb11;
+border: none;
+font-weight: bold;
+margin-top: 70px;
+margin-left: 1265px;
+font-size: 15px;
+
+
+}
+
+.myForm button:hover {
+background: antiquewhite;
+cursor: pointer;
+}
+</style>
+</head>
+<html>
+<body>
+<div class="div2"></div>
+<h2>Filtros de Produtos</h2>
+
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Selecionar</button>
+  <div id="myDropdown" class="dropdown-content">
+    <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+    <a href="#about">Lote</a>
+    <a href="#base">Validade</a>
+    <a href="#blog">Quantidade</a>
+  </div>
+</div>
+
+<script>
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function filterFunction() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown");
+  a = div.getElementsByTagName("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}
+</script>
+
+</div>
+
+
+<form class="myForm">
+<div class="gallery"> 
+  <a target="_blank" href="https://www.condor.ind.br/files/thumb/d370dd56b2637e36ce11c6c564f32f9d.png/400/400/fillcolor/FFFFFF"> 
+    <img src="https://www.condor.ind.br/files/thumb/d370dd56b2637e36ce11c6c564f32f9d.png/400/400/fillcolor/FFFFFF" alt="Cinque Terre" width="600" height="400"> 
+  </a> 
+  <div class="desc">[30 unidades] <br></br> Vassoura CONDOR - Lote 02 - Validade 02/2020</div> 
+  <label class="container">RETIRAR PRODUTOS
+  <input type="checkbox">
+  <span class="checkmark"></span>
+</div> 
+ 
+<div class="gallery"> 
+  <a target="_blank" href="https://pikfly.com/images/products/143/22301.jpg"> 
+    <img src="https://pikfly.com/images/products/143/22301.jpg" alt="Forest" width="600" height="400"> 
+  </a> 
+  <div class="desc">[50 unidades] <br></br> Pack 12 HEINEKEN- Lote 07 - Validade 05/2020</div> 
+  <label class="container">RETIRAR PRODUTOS
+  <input type="checkbox">
+  <span class="checkmark"></span>
+</div> 
+ 
+<div class="gallery"> 
+  <a target="_blank" href="https://www.deliveryextra.com.br/img/uploads/1/633/566633.jpg?type=product"> 
+    <img src="https://www.deliveryextra.com.br/img/uploads/1/633/566633.jpg?type=product" alt="Northern Lights" width="600" height="400"> 
+  </a> 
+  <div class="desc">[150 unidades] <br></br> Creme Dental COLGATE - Lote 03 - Validade 05/2020</div> 
+  <label class="container">RETIRAR PRODUTOS
+  <input type="checkbox">
+  <span class="checkmark"></span>
+</div> 
+ 
+<div class="gallery"> 
+  <a target="_blank" href="https://images-na.ssl-images-amazon.com/images/I/91eYwmmel5L._SL1500_.jpg"> 
+    <img src="https://images-na.ssl-images-amazon.com/images/I/91eYwmmel5L._SL1500_.jpg" alt="Mountains" width="600" height="400"> 
+  </a> 
+  <div class="desc">[300 unidades] <br></br> Batata Lays - LOTE 05 - Validade 11/2020</div> 
+  <label class="container">RETIRAR PRODUTOS
+  <input type="checkbox">
+  <span class="checkmark"></span>
+</div> 
+
+<p><button>RETIRAR</button></p>
+</form>
+
+</div>
+</body>
+</html>

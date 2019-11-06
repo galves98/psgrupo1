@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CPE - Consultoria em Projetos de Estoque</title>
+<link rel="stylesheets" href="style.sass">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+  <div class="menu-bar">
+<ul>
+  <li><a href="disponibilidade"><i class="fas fa-columns"></i>  Home</a></li>
+  <li><a href="estoque"><i class="fas fa-cubes"></i>  Estoque</a>
+    <div class="sub-menu-1">
+      <ul>
+          <li><a href="saida">Saida</a></li>
+          <li><a href="entrada">Entrada</a></li>
+      </ul>
+  </div>
+  </li>
+  
+  </li>
+  <li  class="active"><a href="lucas"><i class="fas fa-users"></i></i>  Cadastro</a></li>
+</ul>
+</div>
+</body>
+</html>
+</script>
+<br></br>
+
+<body>
+
+  <h2 class="headertekst">Cadastrar Gestor</h2>
+<br></br>
+<html lang="en"></html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>My Example</title>
+
+<!-- CSS -->
+<style>
+.myForm {
+font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+font-size: 0.8em;
+width: 28em;
+padding: 1em;
+border: 3px solid  #febb11;
+height: 36em;
+
+}
+
+.myForm * {
+box-sizing: border-box;
+box-align: center;
+margin-top: 5px;
+color: black;
+}
+
+.myForm fieldset {
+border: none;
+padding: 0;
+box-align: center;
+margin-top: 5px;
+color: antiquewhite;
+
+}
+
+.myForm legend,
+.myForm label {
+padding: 0;
+font-weight: bold;
+box-align: center;
+}
+
+.myForm label.choice {
+font-size: 0.9em;
+font-weight: normal;
+box-align: center;
+}
+
+.myForm input[type="text"],
+.myForm input[type="text"],
+.myForm input[type="password"],
+.myForm input[type="datetime-local"],
+.myForm select,
+.myForm textarea {
+display: block;
+width: 100%;
+border: 2px solid  #febb11;
+font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+font-size: 1.2em;
+padding: 0.7em;
+box-align: center;
+}
+
+.myForm textarea {
+height: 100px;
+}
+
+.myForm button {
+padding: 1.5em;
+border-radius: 1.5em;
+background:  #febb11;
+border: none;
+font-weight: bold;
+margin-top: 0.75em;
+font-size: 15px;
+
+
+}
+
+.myForm button:hover {
+background: antiquewhite;
+cursor: pointer;
+}
+
+
+</style>
+
+</head>
+
+<div align="center">
+<form class="myForm" method="post" action="/cadastro">
+
+<p id="mensagem"></p>
+<p> 
+            <label for="nome_cad">Seu nome completo</label>
+            <input id="nome_cad" name="usuario[nome]" required="required" type="text" placeholder="Fernando Couto" />
+</p>
+
+
+<p> 
+            <label for="email_cad">Seu melhor e-Mail</label>
+            <input id="email_cad" name="usuario[email]" required="required" type="text" placeholder="fernandocouto@cpe.com.br" />
+            
+</p>
+
+<p> 
+            <label for="cargo_cad">Seu cargo</label>
+            <input id="cargo_cad" name="usuario[cargo]" required="required" type="text" placeholder="Vendedor" />
+            
+</p>
+
+<p> 
+            <label for="senha_cad">Sua Senha</label>
+            <input id="senha_cad" name="usuario[senha]" required="required" type="password" placeholder="123456" />
+</p>
+
+<p> 
+            <label for="senha_cad">Confirme sua senha</label>
+            <input id="senha_cad" name="usuario[senha_conf]" required="required" type="password" placeholder="123456"/>
+          </p>
+
+
+<p><button type="submit">Cadastrar</button></p>
+
+</form>
+</div>
+</body>
+
+
+</html>
+      
