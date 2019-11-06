@@ -67,6 +67,10 @@ router.post("/", function(req, res, next) {
 	});
 });
 
+router.get('/products', (req, res, next)=>{
+	res.render('product', {title: 'Product'});
+});
+
 router.post('/cadastro', function(req, res, next) {
 	const NovoProduto = {
 		descricao: req.body.descricao,
@@ -83,12 +87,12 @@ router.post('/cadastro', function(req, res, next) {
 	})
 });
 
-// router.get('/exibicao', function(req, res, next) {
-// 	Product.getAll().then((products) =>{
-// 	  res.render('exibicao', { title: 'product', products });
-// 	}).catch(err =>{
-// 	  res.redirect('/product');
-// 	});
-// });
+router.get('/allProducts', function(req, res, next) {
+ Product.getAll().then((products) =>{
+   res.render('allProducts', { title: 'product', products });
+ }).catch(err =>{
+   res.redirect('/product');
+ });
+});
 
 module.exports = router;

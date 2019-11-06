@@ -62,7 +62,7 @@ const config = {
 };
 firebase.initializeApp(config);
 
-mongoose.connect('mongodb+srv://arthurlapertosa:cpejr123@cluster0-a0kww.mongodb.net/test?retryWrites=true&w=majotiry', {
+mongoose.connect('mongodb+srv://jota:kopenhagen@cpe-dxzhb.mongodb.net/test?retryWrites=true&w=majority', {
   useNewUrlPasser: true,
   useUnifiedTopology: true
 });
