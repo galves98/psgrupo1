@@ -2,13 +2,14 @@ const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
     descricao:{
-        type: String, 
+        type: String,
         required: true
     },
     codigo:{
         type: Number,
-        required: true
-    }, 
+        required: true,
+        unique: true
+    },
     quantidade:{
         type: Number,
         required: true
@@ -36,25 +37,16 @@ class Product {
         });
     };
 
-    static updateById(id, product){
-        return new Promise((resolve, reject)=>{
-            ProductModel.findByIdAndUpdate(product, id).then(result =>{
-                resolve(result);
-            }).catch(error =>{
-                reject(error);
-            });
-        });
-    }
-
-    static getAll(){
+    static remover(codigo, quantidade){
         return new Promise ((result, reject)=>{
-            ProductModel.find({}).then(results =>{
-                resolve(results);
+            ProductModel.findOneAndUpdate(codigo, {$inc: {quantidade: - quantidade}}).exec().then(result =>{
+                resolve(result);
             }).catch((error)=>{
                 reject(error);
             });
         });
-    }
+    };
 }
+
 
 module.exports = Product;

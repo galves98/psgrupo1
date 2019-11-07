@@ -98,22 +98,15 @@ router.post('/entrada', function(req, res, next) {
 
 //pagina que remove produtos do banco de dados
 router.post('/saida', function(req, res, next) {
-	const RetiraProduto = {
-		codigo: req.body.codigo,
-		quantidade: req.body.quantidade
-//funcao do mongo que incrementa um valor sobre o outro
-//$inc: { quantidade: -req.body.quantidade}
-	};
-	//funcao que modifica produtos do banco de dados
-	//ta dando erro caralho!!
-	Product.updateById(req.body.codigo, RetiraProduto).then(result=>{
-		console.log(result);
-		console.log("produto(s) removido com sucesso!");
-		res.redirect("/saida");
-	}).catch(error =>{
-		console.log(error);
-	})
-});
+	codigo = req.body.codigo;
+	quantidade = req.body.quantidade;
+	Product.remover(codigo, quantidade).then(results =>{
+		console.log(results);
+		console.log("produto removido com sucesso!");
+				}).catch(error =>{
+					console.log(error);
+				})
+			});
 
 
 //esse allproducts ta sendo utilizado so para teste
