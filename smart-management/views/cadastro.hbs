@@ -8,7 +8,7 @@
 <body>
   <div class="menu-bar">
 <ul>
-  <li><a href="disponibilidade"><i class="fas fa-columns"></i>  Home</a></li>
+  <li><a href="home"><i class="fas fa-columns"></i>  Home</a></li>
   <li><a href="estoque"><i class="fas fa-cubes"></i>  Estoque</a>
     <div class="sub-menu-1">
       <ul>
@@ -17,9 +17,9 @@
       </ul>
   </div>
   </li>
-  
+
   </li>
-  <li  class="active"><a href="lucas"><i class="fas fa-users"></i></i>  Cadastro</a></li>
+  <li  class="active"><a href="cadastro"><i class="fas fa-users"></i></i>  Cadastro</a></li>
 </ul>
 </div>
 </body>
@@ -46,7 +46,7 @@ font-size: 0.8em;
 width: 28em;
 padding: 1em;
 border: 3px solid  #febb11;
-height: 36em;
+height: auto;
 
 }
 
@@ -124,30 +124,30 @@ cursor: pointer;
 <form class="myForm" method="post" action="/cadastro">
 
 <p id="mensagem"></p>
-<p> 
+<p>
             <label for="nome_cad">Seu nome completo</label>
             <input id="nome_cad" name="usuario[nome]" required="required" type="text" placeholder="Fernando Couto" />
 </p>
 
 
-<p> 
+<p>
             <label for="email_cad">Seu melhor e-Mail</label>
             <input id="email_cad" name="usuario[email]" required="required" type="text" placeholder="fernandocouto@cpe.com.br" />
-            
+
 </p>
 
-<p> 
+<p>
             <label for="cargo_cad">Seu cargo</label>
             <input id="cargo_cad" name="usuario[cargo]" required="required" type="text" placeholder="Vendedor" />
-            
+
 </p>
 
-<p> 
+<p>
             <label for="senha_cad">Sua Senha</label>
             <input id="senha_cad" name="usuario[senha]" required="required" type="password" placeholder="123456" />
 </p>
 
-<p> 
+<p>
             <label for="senha_cad">Confirme sua senha</label>
             <input id="senha_cad" name="usuario[senha_conf]" required="required" type="password" placeholder="123456"/>
           </p>
@@ -161,4 +161,3 @@ cursor: pointer;
 
 
 </html>
-      
