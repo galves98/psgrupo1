@@ -17,7 +17,7 @@
       </ul>
   </div>
   </li>
-  
+
   </li>
   <li><a href="lucas"><i class="fas fa-users"></i></i>  Cadastro</a></li>
 </ul>
@@ -25,3 +25,126 @@
 </body>
 </html>
 </script>
+
+<body>
+<br>
+<br>
+  <h2 class="headertekst">Remover Produto no Estoque</h2>
+<br></br>
+<html lang="en"></html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+
+<!-- CSS -->
+<style>
+.myForm {
+font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+font-size: 0.8em;
+width: 28em;
+padding: 1em;
+border: 3px solid  #febb11;
+height: 39.8em;
+
+
+}
+
+.myForm * {
+box-sizing: border-box;
+box-align: center;
+margin-top: 5px;
+color: black;
+}
+
+.myForm fieldset {
+border: none;
+padding: 0;
+box-align: center;
+margin-top: 5px;
+color: antiquewhite;
+
+}
+
+.myForm legend,
+.myForm label {
+padding: 0;
+font-weight: bold;
+box-align: center;
+}
+
+.myForm label.choice {
+font-size: 0.9em;
+font-weight: normal;
+box-align: center;
+}
+
+.myForm input[type="num"],
+.myForm input[type="num"],
+.myForm select,
+.myForm textarea {
+display: block;
+width: 100%;
+border: 2px solid  #febb11;
+font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+font-size: 1.2em;
+padding: 0.7em;
+box-align: center;
+}
+
+.myForm textarea {
+height: 100px;
+}
+
+.myForm button {
+padding: 1.5em;
+border-radius: 1.5em;
+background:  #febb11;
+border: none;
+font-weight: bold;
+margin-top: 0.75em;
+font-size: 15px;
+
+
+}
+
+.myForm button:hover {
+background: antiquewhite;
+cursor: pointer;
+}
+
+input[type=text]:focus {
+  background-color: lightyellow;
+}
+input[type=num]:focus {
+  background-color: lightyellow;
+}
+
+</style>
+
+</head>
+
+<div align="center">
+<form action="/saida" method="post" class="myForm">
+
+
+<p>
+            <label for="produto[codigo]">Código do Produto</label>
+            <input name="codigo" required="required" type="num" placeholder="0001" />
+</p>
+
+<p>
+            <label for="produto[quantidade]">Quantidade</label>
+            <input name="quantidade" required="required" type="num" placeholder="500" />
+</p>
+
+
+<p><button type="submit">Remover</button></p>
+
+</form>
+</div>
+</body>
+
+
+</html>

@@ -32,6 +32,10 @@ router.get('/teste-mongo', function(req, res, next) {
 	res.render('teste-mongo', { title: 'TESTE MONGO' });
 });
 
+router.get('/product', (req, res, next)=>{
+	res.render('product', {title: 'Product'});
+});
+
 //Pega formulário de cadastro e joga para o FireBase
 router.post("/cadastro", function(req, res, next) {
 	const usuario = {
@@ -48,6 +52,8 @@ router.post("/cadastro", function(req, res, next) {
 		console.log(error);
 	});
 });
+
+
 
 //Pega formulário de Login e valida no Firebase
 router.post("/", function(req, res, next) {
@@ -67,11 +73,10 @@ router.post("/", function(req, res, next) {
 	});
 });
 
-router.get('/products', (req, res, next)=>{
-	res.render('product', {title: 'Product'});
-});
 
-router.post('/cadastro', function(req, res, next) {
+
+// adiciona produtos no banco de dados
+router.post('/entrada', function(req, res, next) {
 	const NovoProduto = {
 		descricao: req.body.descricao,
 		codigo: req.body.codigo,
@@ -79,20 +84,51 @@ router.post('/cadastro', function(req, res, next) {
 		lote: req.body.lote,
 		vencimento: Date(req.body.vencimento)
 	};
+	//funcao do mongo que cria um novo produto no banco de dados
 	Product.createNew(NovoProduto).then(result=>{
 		console.log(result);
-		res.render("cadastro");
+		console.log("produto cadastrado com sucesso!");
+		res.redirect("/entrada");
 	}).catch(error =>{
 		console.log(error);
 	})
 });
 
+
+
+//pagina que remove produtos do banco de dados
+router.post('/saida', function(req, res, next) {
+	const RetiraProduto = {
+		codigo: req.body.codigo,
+		quantidade: req.body.quantidade
+//funcao do mongo que incrementa um valor sobre o outro
+//$inc: { quantidade: -req.body.quantidade}
+	};
+	//funcao que modifica produtos do banco de dados
+	//ta dando erro caralho!!
+	Product.updateById(req.body.codigo, RetiraProduto).then(result=>{
+		console.log(result);
+		console.log("produto(s) removido com sucesso!");
+		res.redirect("/saida");
+	}).catch(error =>{
+		console.log(error);
+	})
+});
+
+
+//esse allproducts ta sendo utilizado so para teste
 router.get('/allProducts', function(req, res, next) {
- Product.getAll().then((products) =>{
-   res.render('allProducts', { title: 'product', products });
- }).catch(err =>{
-   res.redirect('/product');
- });
+
+});
+
+
+// mostra todos os produtos do banco de dados
+router.post('/allProducts', function(req, res, next) {
+	Product.getAll().then((products) =>{
+    res.render('allProducts', { title: 'product', products });
+  }).catch(err =>{
+    res.redirect('/product');
+  });
 });
 
 module.exports = router;
