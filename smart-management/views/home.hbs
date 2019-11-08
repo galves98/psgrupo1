@@ -17,7 +17,7 @@
       </ul>
   </div>
   </li>
-  
+
   </li>
   <li><a href="cadastro"><i class="fas fa-users"></i></i>  Cadastro</a></li>
 </ul>
@@ -29,10 +29,28 @@
 
   h2 {
   position: absolute;
-  left: 165px;
+  left: 120px;
   top:150px;
   color:white;
+  font-size: 30px;
 }
+
+  h3 {
+  position: absolute;
+  left: 600px;
+  top:150px;
+  color:white;
+  font-size: 30px;
+  }
+
+  h4 {
+  position: absolute;
+  left: 990px;
+  top:150px;
+  color:white;
+  font-size: 30px;
+  }
+
   h1 {
   position: absolute;
   left: 107px;
@@ -40,32 +58,59 @@
   color: white;
   font-size: 17px;
   background: white;
-}
+  }
 
 
 .div2 {
   width: 350px;
-  height: 450px;  
+  height: 450px;
   padding: 199px;
   position:fixed;
-  left:70px;
+  left:50px;
   top:140px;
   border: 3px solid #febb11;
 }
 
-.img1{
-
+.div3 {
+  height: 450px;
+  padding: 199px;
   position:fixed;
-  left:21px;
-  top:240px;
+  left:497px;
+  top:140px;
+  border: 3px solid #febb11;
 }
 
-.img2{
-
+.div4 {
+  height: 450px;
+  padding: 199px;
   position:fixed;
-  left:790px;
+  left:940px;
+  top:140px;
+  border: 3px solid #febb11;
+}
+
+.listavencendo{
+  width: 400px;
+  position:fixed;
+  left:52px;
   top:200px;
-  clip: rect(0px,450px,600px, 0px);
+}
+
+.listaacabando{
+  width: 400px;
+  position:fixed;
+  left:500px;
+  top:200px;
+}
+.listaretirados{
+  width: 400px;
+  position:fixed;
+  left:943px;
+  top:200px;
+}
+.list-group-item{
+  background-color: transparent;
+  color: white;
 }
 </style>
 <html>
@@ -76,14 +121,28 @@
 <br></br>
 
   <div class="div2"></div>
-  <h2>Produtos por Lote</h2>
-  <h1 >.  <class class="fas fa-cubes" style="color:#f48c37"> Lote 1</i>    / <i class="fas fa-cubes" style="color:#f04946"> Lote 2     /</i>  <i class="fas fa-cubes" style="color:#465867"> Lote 3    / </i>  <i class="fas fa-cubes" style="color:#53bb9c"> Lote 4  </i>  </class>   .</h1>
-<br></br>
+  <h2>Produtos vencendo</h2>
+  <div class="listavencendo">
+  <a href="#" class="list-group-item list-group-item-action">Batata LAYS</a>
+  <a href="#" class="list-group-item list-group-item-action">Pack 12 HEINEKEN</a>
+</div>
 
 
-<img class="img1" src="http://blog.coletum.com/wp-content/uploads/2017/11/grafico-03.png" alt="Graf" width="500" height="333">
- 
- 
+  <div class="div3"></div>
+  <h3>Lotes acabando</h3>
+  <div class="listaacabando">
+  <a href="#" class="list-group-item list-group-item-action">Lote 1</a>
+  <a href="#" class="list-group-item list-group-item-action">Lote 2</a>
+</div>
+
+  <div class="div4"></div>
+  <h4>Retirados recentemente</h4>
+  <div class="listaretirados">
+    <a href="#" class="list-group-item list-group-item-action">Batata LAYS</a>
+    <a href="#" class="list-group-item list-group-item-action">Pack 12 HEINEKEN</a>
+</div>
+
+
+
 </body>
 </html>
-
