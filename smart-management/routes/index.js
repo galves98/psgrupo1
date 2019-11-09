@@ -4,50 +4,41 @@ var firebase = require('firebase');
 var Product = require('../models/product')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-	res.render('login', { title: 'LOGIN' });
-});
 
-router.get('/cadastro', function(req, res, next) {
-	res.render('cadastro', { title: 'Express' });
-});
-
-router.get('/home', function(req, res, next) {
-	res.render('home', { title: 'HOME' });
-});
-
+//  ESTOQUE
 router.get('/estoque', function(req, res, next) {
 	res.render('estoque', { title: 'ESTOQUE' });
 });
 
-router.get('/saida', function(req, res, next) {
-	res.render('saida', { title: 'SAIDA' });
-});
 
-router.get('/entrada', function(req, res, next) {
-	res.render('entrada', { title: 'ENTRADA' });
-});
 
+// TESTE-MONGO
 router.get('/teste-mongo', function(req, res, next) {
 	res.render('teste-mongo', { title: 'TESTE MONGO' });
 });
 
+
+
+// PRODUCTS
 router.get('/product', (req, res, next)=>{
 	res.render('product', {title: 'Product'});
 });
 
-//Pega formulário de cadastro e joga para o FireBase
+
+// CADASTRO
+router.get('/cadastro', function(req, res, next) {				//Pega formulário de cadastro e joga para o FireBase
+	res.render('cadastro', { title: 'Express' });
+});
+
 router.post("/cadastro", function(req, res, next) {
 	const usuario = {
 		email: req.body.usuario.email,
 		senha: req.body.usuario.senha
 	}
 	firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha).then((firebase)=>{
-		//Se entrar aqui, é porque logou o usuario com sucesso
-		res.render("cadastro");
+		res.render("cadastro");							//Se entrar aqui, é porque logou o usuario com sucesso
 		console.log("Cadastrado com sucesso");
-		}).catch((error)=>{
-		//Caso nao conseguiu logar usuario
+		}).catch((error)=>{									//Caso nao conseguiu logar usuario
 		res.render("cadastro");
 		console.log(error);
 	});
@@ -55,19 +46,21 @@ router.post("/cadastro", function(req, res, next) {
 
 
 
-//Pega formulário de Login e valida no Firebase
-router.post("/", function(req, res, next) {
+//  '/'
+router.get('/', function(req, res, next) {
+	res.render('login', { title: 'LOGIN' });
+});
+router.post("/", function(req, res, next) {    //Pega formulário de Login e valida no Firebase
 	console.log(req.body.usuario.email);
 	const usuario = {
 		email: req.body.usuario.email,
 		senha: req.body.usuario.senha
 	}
 	firebase.auth().signInWithEmailAndPassword(usuario.email, usuario.senha).then((firebase)=>{
-		//Se entrar aqui, é porque logou o usuario com sucesso
-		res.redirect("home");
+		res.redirect("home");				//Se entrar aqui, é porque logou o usuario com sucesso
+		//window.alert("Cadastrado com sucesso");
 		console.log("Cadastrado com sucesso");
-		}).catch((error)=>{
-		//Caso nao conseguiu logar usuario
+		}).catch((error)=>{					//Caso nao conseguiu logar usuario
 		res.render("login");
 		console.log(error);
 	});
@@ -75,31 +68,36 @@ router.post("/", function(req, res, next) {
 
 
 
-// adiciona produtos no banco de dados
+//ENTRADA
+router.get('/entrada', function(req, res, next) {
+		res.render('entrada', { title: 'ENTRADA' });
+});
+
 router.post('/entrada', function(req, res, next) {
-	const NovoProduto = {
-		descricao: req.body.descricao,
-		codigo: req.body.codigo,
-		quantidade: req.body.quantidade,
-		lote: req.body.lote,
-		vencimento: Date(req.body.vencimento)
-	};
-	//funcao do mongo que cria um novo produto no banco de dados
-	Product.createNew(NovoProduto).then(result=>{
-		console.log(result);
-		console.log("produto cadastrado com sucesso!");
-		res.redirect("/entrada");
-	}).catch(error =>{
-		console.log(error);
-	})
+		const NovoProduto = {
+			descricao: req.body.descricao,
+			codigo: req.body.codigo,
+			quantidade: req.body.quantidade,
+			lote: req.body.lote,
+			vencimento: Date(req.body.vencimento)
+		};
+		Product.createNew(NovoProduto).then(result=>{
+			console.log(result);
+			console.log("produto cadastrado com sucesso!");
+			res.redirect("/entrada");
+		}).catch(error =>{
+			console.log(error);
+		})
 });
 
 
-
-//pagina que remove produtos do banco de dados
+//SAIDA
+router.get('/saida', function(req, res, next) {
+	res.render('saida', { title: 'SAIDA' });
+});
 router.post('/saida', function(req, res, next) {
-	codigo = req.body.codigo;
-	quantidade = req.body.quantidade;
+	const codigo = req.body.codigo;
+	const quantidade = req.body.quantidade;
 	Product.remover(codigo, quantidade).then(results =>{
 		console.log(results);
 		console.log("produto removido com sucesso!");
@@ -109,19 +107,30 @@ router.post('/saida', function(req, res, next) {
 			});
 
 
-//esse allproducts ta sendo utilizado so para teste
-router.get('/allProducts', function(req, res, next) {
 
+//HOME
+router.get('/home', function(req, res, next) {
+	res.render('home', { title: 'HOME' });
+		Product.find().all('lote', ['1']);
+		Product.find( { vencimento: { $lt: new Date('2019-11-20') } } );
+});
+	router.post('/home', function(req, res, next) {
+			});
+
+
+// ALL PRODUCTS
+router.get('/allProducts', function(req, res, next) {
+	res.render('allProducts', { title: 'ALLPRODUCTS' });
 });
 
-
-// mostra todos os produtos do banco de dados
-router.post('/allProducts', function(req, res, next) {
+router.post('/allProducts', function(req, res, next) {				//AINDA NAO TA FUNFANDO
 	Product.getAll().then((products) =>{
     res.render('allProducts', { title: 'product', products });
   }).catch(err =>{
     res.redirect('/product');
   });
 });
+
+
 
 module.exports = router;
