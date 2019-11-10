@@ -12,7 +12,8 @@ const productSchema = new mongoose.Schema({
     },
     quantidade:{
         type: Number,
-        required: true
+        required: true,
+        min: 0
     },
     lote:{
         type: Number,
@@ -49,7 +50,59 @@ class Product {
     };
 
 
-}
+    static produtosVencendo(){
+      return new Promise((resolve,reject)=>{
+          ProductModel.find({ vencimento: { $lt: new Date('2019-12-12') }}, {  _id: 0 }).then(result =>{
+              resolve(result);
+              console.log("produtos vencendo:" );
+              console.log(result);
+          }).catch(error=>{
+              reject(error);
+              console.log(error);
+          });
+      });
+    };
+
+    static lotesAcabando(){
+      return new Promise((resolve,reject)=>{
+          ProductModel.find({lote:{$lt: 2}}, {  _id: 0 }).then(result =>{
+              resolve(result);
+              console.log("lotes acabando:" );
+              console.log(result);
+          }).catch(error=>{
+              reject(error);
+              console.log(error);
+          });
+      });
+    };
+
+    static retiradosRecente(){      //AINDA NAO TA FUNFANDO
+      return new Promise((resolve,reject)=>{
+          ProductModel.find({}, {  _id: 0 }).sort().then(result =>{
+              resolve(result);
+              console.log("retirados recentemente:");
+              console.log(result);
+          }).catch(error=>{
+              reject(error);
+              console.log(error);
+          });
+      });
+    };
+
+    static todosProdutos(){
+      return new Promise((resolve,reject)=>{
+          ProductModel.find({}, {  _id: 0 }).then(result =>{
+              resolve(result);
+              console.log("todos os produtos:");
+              console.log(result);
+          }).catch(error=>{
+              reject(error);
+              console.log(error);
+          });
+      });
+    };
+
+};
 
 
 module.exports = Product;

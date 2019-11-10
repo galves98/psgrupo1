@@ -3,11 +3,11 @@ var router = express.Router();
 var firebase = require('firebase');
 var Product = require('../models/product')
 
-/* GET home page. */
 
 //  ESTOQUE
 router.get('/estoque', function(req, res, next) {
 	res.render('estoque', { title: 'ESTOQUE' });
+ Product.todosProdutos();
 });
 
 
@@ -95,12 +95,14 @@ router.post('/entrada', function(req, res, next) {
 router.get('/saida', function(req, res, next) {
 	res.render('saida', { title: 'SAIDA' });
 });
+
 router.post('/saida', function(req, res, next) {
 	const codigo = req.body.codigo;
 	const quantidade = req.body.quantidade;
 	Product.remover(codigo, quantidade).then(results =>{
 		console.log(results);
 		console.log("produto removido com sucesso!");
+		res.redirect("/entrada");
 				}).catch(error =>{
 					console.log(error);
 				})
@@ -111,25 +113,22 @@ router.post('/saida', function(req, res, next) {
 //HOME
 router.get('/home', function(req, res, next) {
 	res.render('home', { title: 'HOME' });
-		Product.find().all('lote', ['1']);
-		Product.find( { vencimento: { $lt: new Date('2019-11-20') } } );
+	 Product.produtosVencendo();
+	 Product.lotesAcabando();
+	 Product.retiradosRecente();
 });
-	router.post('/home', function(req, res, next) {
+
+router.post('/home', function(req, res, next) {
 			});
 
 
 // ALL PRODUCTS
 router.get('/allProducts', function(req, res, next) {
 	res.render('allProducts', { title: 'ALLPRODUCTS' });
+	Product.todosProdutos();
 });
 
-router.post('/allProducts', function(req, res, next) {				//AINDA NAO TA FUNFANDO
-	Product.getAll().then((products) =>{
-    res.render('allProducts', { title: 'product', products });
-  }).catch(err =>{
-    res.redirect('/product');
-  });
-});
+
 
 
 
