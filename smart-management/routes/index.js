@@ -3,37 +3,55 @@ var router = express.Router();
 var firebase = require('firebase');
 var Product = require('../models/product')
 
-/* GET home page. */
+function ensureAuthenticated (req,res,next){
+	firebase.auth().onAuthStateChanged(function(user) {
+	  if (user) {
+	    // User is signed in.
+			return next();
+	  } else {
+
+			// No user is signed in.
+			res.redirect("/");
+
+	}
+	});
+};
+
 router.get('/', function(req, res, next) {
 	res.render('login', { title: 'LOGIN' });
 });
-
-router.get('/cadastro', function(req, res, next) {
+/* GET home page. */
+function irparahome (){
+router.get('/', function(req, res, next) {
+	res.render('login', { title: 'LOGIN' });
+});
+}
+router.get('/cadastro',ensureAuthenticated, function(req, res, next) {
 	res.render('cadastro', { title: 'Express' });
 });
 
-router.get('/home', function(req, res, next) {
+router.get('/home',ensureAuthenticated, function(req, res, next) {
 	res.render('home', { title: 'HOME' });
 });
 
-router.get('/estoque', function(req, res, next) {
+router.get('/estoque',ensureAuthenticated, function(req, res, next) {
 	res.render('estoque', { title: 'ESTOQUE' });
 });
 
-router.get('/saida', function(req, res, next) {
+router.get('/saida',ensureAuthenticated, function(req, res, next) {
 	res.render('saida', { title: 'SAIDA' });
 });
 
-router.get('/entrada', function(req, res, next) {
+router.get('/entrada',ensureAuthenticated, function(req, res, next) {
 	res.render('entrada', { title: 'ENTRADA' });
 });
 
-router.get('/teste-mongo', function(req, res, next) {
+router.get('/teste-mongo',ensureAuthenticated, function(req, res, next) {
 	res.render('teste-mongo', { title: 'TESTE MONGO' });
 });
 
 //Pega formulário de cadastro e joga para o FireBase
-router.post("/cadastro", function(req, res, next) {
+router.post("/cadastro",ensureAuthenticated, function(req, res, next) {
 	const usuario = {
 		email: req.body.usuario.email,
 		senha: req.body.usuario.senha
@@ -42,10 +60,12 @@ router.post("/cadastro", function(req, res, next) {
 		//Se entrar aqui, é porque logou o usuario com sucesso
 		res.render("cadastro");
 		console.log("Cadastrado com sucesso");
+		alert("Cadastrado com sucesso");
 		}).catch((error)=>{
 		//Caso nao conseguiu logar usuario
 		res.render("cadastro");
 		console.log(error);
+		alert("Erro no cadastro");
 	});
 });
 
@@ -58,8 +78,9 @@ router.post("/", function(req, res, next) {
 	}
 	firebase.auth().signInWithEmailAndPassword(usuario.email, usuario.senha).then((firebase)=>{
 		//Se entrar aqui, é porque logou o usuario com sucesso
+
 		res.redirect("home");
-		console.log("Cadastrado com sucesso");
+		console.log("Logado com sucesso");
 		}).catch((error)=>{
 		//Caso nao conseguiu logar usuario
 		res.render("login");
