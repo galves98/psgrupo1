@@ -3,34 +3,56 @@ var router = express.Router();
 var firebase = require('firebase');
 var Product = require('../models/product')
 
+function ensureAuthenticated (req,res,next){
+	firebase.auth().onAuthStateChanged(function(user) {
+	  if (user) {
+	    // User is signed in.
+			return next();
+	  } else {
 
-//  ESTOQUE
-router.get('/estoque', function(req, res, next) {
+			// No user is signed in.
+			res.redirect("/");
+
+	}
+	});
+};
+
+router.get('/', function(req, res, next) {
+	res.render('login', { title: 'LOGIN' });
+});
+/* GET home page. */
+function irparahome (){
+router.get('/', function(req, res, next) {
+	res.render('login', { title: 'LOGIN' });
+});
+}
+router.get('/cadastro',ensureAuthenticated, function(req, res, next) {
+	res.render('cadastro', { title: 'Express' });
+});
+
+router.get('/home',ensureAuthenticated, function(req, res, next) {
+	res.render('home', { title: 'HOME' });
+});
+
+router.get('/estoque',ensureAuthenticated, function(req, res, next) {
 	res.render('estoque', { title: 'ESTOQUE' });
  Product.todosProdutos();
 });
 
+router.get('/saida',ensureAuthenticated, function(req, res, next) {
+	res.render('saida', { title: 'SAIDA' });
+});
 
+router.get('/entrada',ensureAuthenticated, function(req, res, next) {
+	res.render('entrada', { title: 'ENTRADA' });
+});
 
-// TESTE-MONGO
-router.get('/teste-mongo', function(req, res, next) {
+router.get('/teste-mongo',ensureAuthenticated, function(req, res, next) {
 	res.render('teste-mongo', { title: 'TESTE MONGO' });
 });
 
-
-
-// PRODUCTS
-router.get('/product', (req, res, next)=>{
-	res.render('product', {title: 'Product'});
-});
-
-
-// CADASTRO
-router.get('/cadastro', function(req, res, next) {				//Pega formulário de cadastro e joga para o FireBase
-	res.render('cadastro', { title: 'Express' });
-});
-
-router.post("/cadastro", function(req, res, next) {
+//Pega formulário de cadastro e joga para o FireBase
+router.post("/cadastro",ensureAuthenticated, function(req, res, next) {
 	const usuario = {
 		email: req.body.usuario.email,
 		senha: req.body.usuario.senha
@@ -38,9 +60,12 @@ router.post("/cadastro", function(req, res, next) {
 	firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha).then((firebase)=>{
 		res.render("cadastro");							//Se entrar aqui, é porque logou o usuario com sucesso
 		console.log("Cadastrado com sucesso");
-		}).catch((error)=>{									//Caso nao conseguiu logar usuario
+		alert("Cadastrado com sucesso");
+		}).catch((error)=>{
+		//Caso nao conseguiu logar usuario
 		res.render("cadastro");
 		console.log(error);
+		alert("Erro no cadastro");
 	});
 });
 
@@ -57,10 +82,12 @@ router.post("/", function(req, res, next) {    //Pega formulário de Login e val
 		senha: req.body.usuario.senha
 	}
 	firebase.auth().signInWithEmailAndPassword(usuario.email, usuario.senha).then((firebase)=>{
-		res.redirect("home");				//Se entrar aqui, é porque logou o usuario com sucesso
-		//window.alert("Cadastrado com sucesso");
-		console.log("Cadastrado com sucesso");
-		}).catch((error)=>{					//Caso nao conseguiu logar usuario
+		//Se entrar aqui, é porque logou o usuario com sucesso
+
+		res.redirect("home");
+		console.log("Logado com sucesso");
+		}).catch((error)=>{
+		//Caso nao conseguiu logar usuario
 		res.render("login");
 		console.log(error);
 	});
