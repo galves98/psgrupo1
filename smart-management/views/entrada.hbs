@@ -131,23 +131,23 @@ input[type=num]:focus {
 <form action="/entrada" method="post" class="myForm">
 
 <p>
-            <label for="produto[descricao]">Descrição do Produto</label>
-            <input name="produto[descricao]" required="required" type="text" placeholder="Batata Chips LAYS" />
+            <label for="produto[descricao]">Nome do Produto</label>
+            <input name="descricao" required="required" type="text" placeholder="Batata Chips LAYS" />
 </p>
 
 <p>
             <label for="produto[codigo]">Código do Produto</label>
-            <input name="produto[codigo]" required="required" type="num" placeholder="0001" />
+            <input name="codigo" required="required" type="num" placeholder="0001" />
 </p>
 
 <p>
             <label for="produto[quantidade]">Quantidade</label>
-            <input name="produto[quantidade]" required="required" type="num" placeholder="500" />
+            <input name="quantidade" required="required" type="num" placeholder="500" />
 </p>
 
 <p>
 <label>Lote
-<select id="pickup_place" name="produto[lote]">
+<select id="pickup_place" name="lote">
 <option value="1" >Lote 01 - 2019</option>
 <option value="2" >Lote 02 - 2019</option>
 <option value="3" >Lote 03 - 2019</option>
@@ -159,11 +159,12 @@ input[type=num]:focus {
 
 <p>
 <label>Data de Vencimento</label>
-<input type="datetime-local" name="produto[vencimento]">
+<input type="datetime-local" name="vencimento">
 </p>
 
 
 <p><button type="submit">Cadastrar</button></p>
+
 
 </form>
 </div>

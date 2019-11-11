@@ -29,7 +29,7 @@
 <body>
 <br>
 <br>
-  <h2 class="headertekst">Retirar Produto no Estoque</h2>
+  <h2 class="headertekst">Remover Produto no Estoque</h2>
 <br></br>
 <html lang="en"></html>
 <head>
@@ -46,7 +46,7 @@ font-size: 0.8em;
 width: 28em;
 padding: 1em;
 border: 3px solid  #febb11;
-height: auto;
+height: 39.8em;
 
 
 }
@@ -80,10 +80,8 @@ font-weight: normal;
 box-align: center;
 }
 
-.myForm input[type="text"],
 .myForm input[type="num"],
 .myForm input[type="num"],
-.myForm input[type="datetime-local"],
 .myForm select,
 .myForm textarea {
 display: block;
@@ -116,7 +114,7 @@ background: antiquewhite;
 cursor: pointer;
 }
 
-input[type=text]:focus {
+input[type=num]:focus {
   background-color: lightyellow;
 }
 input[type=num]:focus {
@@ -130,40 +128,19 @@ input[type=num]:focus {
 <div align="center">
 <form action="/saida" method="post" class="myForm">
 
-<p>
-            <label for="produto[descricao]">Descrição do Produto</label>
-            <input name="produto[descricao]" required="required" type="text" placeholder="Batata Chips LAYS" />
-</p>
 
 <p>
             <label for="produto[codigo]">Código do Produto</label>
-            <input name="produto[codigo]" required="required" type="num" placeholder="0001" />
+            <input name="codigo" required="required" type="num" placeholder="0001" />
 </p>
 
 <p>
             <label for="produto[quantidade]">Quantidade</label>
-            <input name="produto[quantidade]" required="required" type="num" placeholder="500" />
-</p>
-
-<p>
-<label>Lote
-<select id="pickup_place" name="produto[lote]">
-<option value="1" >Lote 01 - 2019</option>
-<option value="2" >Lote 02 - 2019</option>
-<option value="3" >Lote 03 - 2019</option>
-<option value="4" >Lote 04 - 2019</option>
-
-</select>
-</label>
-</p>
-
-<p>
-<label>Data de Vencimento</label>
-<input type="datetime-local" name="produto[vencimento]">
+            <input name="quantidade" required="required" type="num" placeholder="500" />
 </p>
 
 
-<p><button type="submit">Retirar</button></p>
+<p><button type="submit">Remover</button></p>
 
 </form>
 </div>

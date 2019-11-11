@@ -2,16 +2,18 @@ const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
     descricao:{
-        type: String, 
+        type: String,
         required: true
     },
     codigo:{
         type: Number,
-        required: true
-    }, 
+        required: true,
+        unique: true
+    },
     quantidade:{
         type: Number,
-        required: true
+        required: true,
+        min: 0
     },
     lote:{
         type: Number,
@@ -26,6 +28,7 @@ const productSchema = new mongoose.Schema({
 const ProductModel = mongoose.model('ProductArtLima', productSchema);
 
 class Product {
+
     static createNew(product){
         return new Promise((resolve,reject)=>{
             ProductModel.create(product).then(result =>{
@@ -36,25 +39,70 @@ class Product {
         });
     };
 
-    static updateById(id, product){
-        return new Promise((resolve, reject)=>{
-            ProductModel.findByIdAndUpdate(product, id).then(result =>{
-                resolve(result);
-            }).catch(error =>{
-                reject(error);
-            });
-        });
-    }
-
-    static getAll(){
+    static remover(codigo, quantidade){
         return new Promise ((result, reject)=>{
-            ProductModel.find({}).then(results =>{
-                resolve(results);
-            }).catch((error)=>{
-                reject(error);
-            });
+          ProductModel.findOneAndUpdate({codigo: codigo}, {$inc: {quantidade: - quantidade} }, {new: true, runValidators: true}).then(doc => {
+              console.log(doc)
+            }).catch(err => {
+                console.error(err)
+              });
         });
-    }
-}
+    };
+
+
+    static produtosVencendo(){
+      return new Promise((resolve,reject)=>{
+          ProductModel.find({ vencimento: { $lt: new Date('2019-12-12') }}, {  _id: 0 }).then(result =>{
+              resolve(result);
+              console.log("produtos vencendo:" );
+              console.log(result);
+          }).catch(error=>{
+              reject(error);
+              console.log(error);
+          });
+      });
+    };
+
+    static lotesAcabando(){
+      return new Promise((resolve,reject)=>{
+          ProductModel.find({lote:{$lt: 2}}, {  _id: 0 }).then(result =>{
+              resolve(result);
+              console.log("lotes acabando:" );
+              console.log(result);
+          }).catch(error=>{
+              reject(error);
+              console.log(error);
+          });
+      });
+    };
+
+    static retiradosRecente(){      //AINDA NAO TA FUNFANDO
+      return new Promise((resolve,reject)=>{
+          ProductModel.find({}, {  _id: 0 }).sort().then(result =>{
+              resolve(result);
+              console.log("retirados recentemente:");
+              console.log(result);
+          }).catch(error=>{
+              reject(error);
+              console.log(error);
+          });
+      });
+    };
+
+    static todosProdutos(){
+      return new Promise((resolve,reject)=>{
+          ProductModel.find({}, {  _id: 0 }).then(result =>{
+              resolve(result);
+              console.log("todos os produtos:");
+              console.log(result);
+          }).catch(error=>{
+              reject(error);
+              console.log(error);
+          });
+      });
+    };
+
+};
+
 
 module.exports = Product;
