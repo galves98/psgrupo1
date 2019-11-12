@@ -5,9 +5,13 @@ var Product = require('../models/product')
 
 
 //  ESTOQUE
-router.get('/estoque', function(req, res, next) {
-	res.render('estoque', { title: 'ESTOQUE' });
- Product.todosProdutos();
+router.get('/allProducts', function(req, res, next) {
+ Product.todosProdutos().then((product) => {
+	 console.log(product);
+	 		res.render('allProducts', {title: 'ESTOQUE', product});
+	 }).catch(error =>{
+		 console.log(error);
+	 });
 });
 
 
@@ -102,7 +106,7 @@ router.post('/saida', function(req, res, next) {
 	Product.remover(codigo, quantidade).then(results =>{
 		console.log(results);
 		console.log("produto removido com sucesso!");
-		res.redirect("/entrada");
+		res.redirect("/saida");
 				}).catch(error =>{
 					console.log(error);
 				})
@@ -122,11 +126,25 @@ router.post('/home', function(req, res, next) {
 			});
 
 
-// ALL PRODUCTS
+//ALL PRODUCTS
 router.get('/allProducts', function(req, res, next) {
 	res.render('allProducts', { title: 'ALLPRODUCTS' });
 	Product.todosProdutos();
 });
+
+// router.get('/allProducts', function(req, res){
+// 	 ProductModel.connect(url, function(err, db){
+// 		 				var str = "";
+//             var cursor = db.collection('ProductArtLima').find();
+//             cursor.each(function(err, item) {
+//                 if (item != null) {
+//                     str = str + "   id  " + "</br>";
+//                 }
+//             });
+//             res.send(str);
+//             db.close();
+//         });
+//     });
 
 
 

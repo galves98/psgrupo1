@@ -39,9 +39,13 @@ class Product {
         });
     };
 
-    static remover(codigo, quantidade){
+    static remover(codigo, quantidade){   //falta arrumar logica do ficar negativo
         return new Promise ((result, reject)=>{
-          ProductModel.findOneAndUpdate({codigo: codigo}, {$inc: {quantidade: - quantidade} }, {new: true, runValidators: true}).then(doc => {
+          ProductModel.findOneAndUpdate(
+            {codigo: codigo},
+            {$inc: {quantidade: - quantidade} },
+            {new: true, runValidators: true}
+          ).then(doc => {
               console.log(doc)
             }).catch(err => {
                 console.error(err)
@@ -50,13 +54,17 @@ class Product {
     };
 
 
-    static produtosVencendo(){
+    static produtosVencendo(){      //mudar data pra 3 meses
       return new Promise((resolve,reject)=>{
-          ProductModel.find({ vencimento: { $lt: new Date('2019-12-12') }}, {  _id: 0 }).then(result =>{
+          ProductModel.find(
+            { vencimento: { $lt: new Date('2019-12-12') }},
+            {  _id: 0 },
+            { sort : { vencimento : 1 } }
+          ).then(result =>{
               resolve(result);
               console.log("produtos vencendo:" );
               console.log(result);
-          }).catch(error=>{
+          }).catch(error =>{
               reject(error);
               console.log(error);
           });
@@ -65,7 +73,10 @@ class Product {
 
     static lotesAcabando(){
       return new Promise((resolve,reject)=>{
-          ProductModel.find({lote:{$lt: 2}}, {  _id: 0 }).then(result =>{
+          ProductModel.find(
+            {quantidade:{$lt: 100}},
+            {  _id: 0 }
+          ).then(result =>{
               resolve(result);
               console.log("lotes acabando:" );
               console.log(result);
@@ -76,9 +87,13 @@ class Product {
       });
     };
 
-    static retiradosRecente(){      //AINDA NAO TA FUNFANDO
+    static retiradosRecente(){
       return new Promise((resolve,reject)=>{
-          ProductModel.find({}, {  _id: 0 }).sort().then(result =>{
+          ProductModel.find(
+            { updatedAt: { $lt: new Date('2019-12-12') }},
+            {  _id: 0 },
+            { sort : { updatedAt : -1 } }
+          ).then(result =>{
               resolve(result);
               console.log("retirados recentemente:");
               console.log(result);
@@ -90,11 +105,11 @@ class Product {
     };
 
     static todosProdutos(){
-      return new Promise((resolve,reject)=>{
-          ProductModel.find({}, {  _id: 0 }).then(result =>{
-              resolve(result);
+      return new Promise((result,reject)=>{
+          ProductModel.find({}).then(results =>{
+              resolve(results);
               console.log("todos os produtos:");
-              console.log(result);
+              console.log(results);
           }).catch(error=>{
               reject(error);
               console.log(error);

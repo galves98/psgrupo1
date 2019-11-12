@@ -52,50 +52,20 @@
    	<div id="list" class="row">
 
   	<div class="table-responsive col-md-12">
-  		<table class="table table-striped" cellspacing="0" cellpadding="0">
-  			<thead>
-  				<tr>
-  					<th>Código</th>
-  					<th>Descrição</th>
-  					<th>Quantidade</th>
-            <th>Lote</th>
-  					<th>Data de Vencimento</th>
-  					<th class="actions">Ações</th>
-  				</tr>
-  			</thead>
-  			<tbody>
-  				<tr>
-  					<td>001</td>
-  					<td>Batata Chips LAYS</td>
-  					<td>500</td>
-            <td>Lote 01 - 2019</td>
-  					<td>01/01/2015</td>
-  					<td class="actions">
-  						<a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-  					</td>
-  				</tr>
-          <tr>
-  					<td>002</td>
-  					<td>Vassoura CONDOR</td>
-  					<td>30</td>
-            <td>Lote 02 - 2019</td>
-  					<td>05/12/2019</td>
-  					<td class="actions">
-  						<a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-  					</td>
-  				</tr>
-          <tr>
-  					<td>003</td>
-  					<td>Pack 12 HEINEKEN</td>
-  					<td>300</td>
-            <td>Lote 04 - 2019</td>
-  					<td>01/01/2020</td>
-  					<td class="actions">
-  						<a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-  					</td>
-  				</tr>
-  			</tbody>
-  		</table>
+
+
+      {{#each product}}
+
+  <div class = "product">
+     <div class = "product-name">Nome: {{descricao}}</div>
+     <div class = "product-price">Preço: {{codigo}} </div>
+     <div class = "product-description">Quantidade: {{quantidade}} </div>
+     <div class = "product-description">Lote: {{lote}} </div>
+     <div class = "product-description">Vencimento: {{vencimento}} </div>
+   </div>
+
+     {{/each}}
+  	
   	</div>
 
   	</div> <!-- /#list -->

@@ -1,9 +1,11 @@
-<a href="/product"> <button>Voltar</button> </a>
-<br>
-{{#each products}}
+{{#each product}}
+
 <div class = "product">
-   <div class = "product-name">Nome: {{name}}</div>
-   <div class = "product-price">Preço: {{price}} </div>
-   <div class = "product-description">Descrição: {{description}} </div>
+<div class = "product-name">Nome: {{descricao}}</div>
+<div class = "product-price">Preço: {{codigo}} </div>
+<div class = "product-description">Quantidade: {{quantidade}} </div>
+<div class = "product-description">Lote: {{lote}} </div>
+<div class = "product-description">Vencimento: {{vencimento}} </div>
 </div>
+
 {{/each}}

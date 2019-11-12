@@ -16,6 +16,24 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+
+//var MongoClient = require('mongodb').MongoClient;
+
+
+// app.route('/allProducts').get(function(req, res){ MongoClient.connect(url, function(err, db){
+//             var cursor = db.collection('ProductArtLima').find();
+//             cursor.each(function(err, item) {
+//                 if (item != null) {
+//                     str = str + "   id  " + "</br>";
+//                 }
+//             });
+//             res.send(str);
+//             db.close();
+//         });
+//     });
+
+//var server = app.listen(3000, function() {});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
