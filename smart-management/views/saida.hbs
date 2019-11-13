@@ -29,8 +29,8 @@
 <body>
 <br>
 <br>
-  <h2 class="headertekst">Retirar Produto no Estoque</h2>
-<br></br>
+  <h2 class="headertekst">Remover Produto do Estoque</h2>
+<br>
 <html lang="en"></html>
 <head>
 <meta charset="utf-8">
@@ -48,13 +48,12 @@ padding: 1em;
 border: 3px solid  #febb11;
 height: auto;
 
-
 }
 
 .myForm * {
 box-sizing: border-box;
 box-align: center;
-margin-top: 5px;
+margin-top: 0px;
 color: black;
 }
 
@@ -62,7 +61,7 @@ color: black;
 border: none;
 padding: 0;
 box-align: center;
-margin-top: 5px;
+margin-top: 0px;
 color: antiquewhite;
 
 }
@@ -80,9 +79,9 @@ font-weight: normal;
 box-align: center;
 }
 
-.myForm input[type="text"],
 .myForm input[type="num"],
 .myForm input[type="num"],
+.myForm input[type="password"],
 .myForm input[type="datetime-local"],
 .myForm select,
 .myForm textarea {
@@ -91,12 +90,12 @@ width: 100%;
 border: 2px solid  #febb11;
 font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 font-size: 1.2em;
-padding: 0.7em;
+padding: 0.4em;
 box-align: center;
 }
 
 .myForm textarea {
-height: 100px;
+
 }
 
 .myForm button {
@@ -116,12 +115,6 @@ background: antiquewhite;
 cursor: pointer;
 }
 
-input[type=text]:focus {
-  background-color: lightyellow;
-}
-input[type=num]:focus {
-  background-color: lightyellow;
-}
 
 </style>
 
@@ -130,40 +123,19 @@ input[type=num]:focus {
 <div align="center">
 <form action="/saida" method="post" class="myForm">
 
-<p>
-            <label for="produto[descricao]">Descrição do Produto</label>
-            <input name="produto[descricao]" required="required" type="text" placeholder="Batata Chips LAYS" />
-</p>
 
 <p>
             <label for="produto[codigo]">Código do Produto</label>
-            <input name="produto[codigo]" required="required" type="num" placeholder="0001" />
+            <input name="codigo" required="required" type="num" placeholder="0001" />
 </p>
 
 <p>
             <label for="produto[quantidade]">Quantidade</label>
-            <input name="produto[quantidade]" required="required" type="num" placeholder="500" />
-</p>
-
-<p>
-<label>Lote
-<select id="pickup_place" name="produto[lote]">
-<option value="1" >Lote 01 - 2019</option>
-<option value="2" >Lote 02 - 2019</option>
-<option value="3" >Lote 03 - 2019</option>
-<option value="4" >Lote 04 - 2019</option>
-
-</select>
-</label>
-</p>
-
-<p>
-<label>Data de Vencimento</label>
-<input type="datetime-local" name="produto[vencimento]">
+            <input name="quantidade" required="required" type="num" placeholder="500" />
 </p>
 
 
-<p><button type="submit">Retirar</button></p>
+<p><button type="submit">Remover</button></p>
 
 </form>
 </div>

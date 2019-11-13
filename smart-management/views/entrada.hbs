@@ -30,7 +30,8 @@
 <br>
 <br>
   <h2 class="headertekst">Cadastrar Produto no Estoque</h2>
-<br></br>
+<br>
+
 <html lang="en"></html>
 <head>
 <meta charset="utf-8">
@@ -46,15 +47,14 @@ font-size: 0.8em;
 width: 28em;
 padding: 1em;
 border: 3px solid  #febb11;
-height: auto;
-
+height: -10%;
 
 }
 
 .myForm * {
 box-sizing: border-box;
 box-align: center;
-margin-top: 5px;
+margin-top: 0px;
 color: black;
 }
 
@@ -62,7 +62,7 @@ color: black;
 border: none;
 padding: 0;
 box-align: center;
-margin-top: 5px;
+margin-top: 3px;
 color: antiquewhite;
 
 }
@@ -83,7 +83,7 @@ box-align: center;
 .myForm input[type="text"],
 .myForm input[type="num"],
 .myForm input[type="num"],
-.myForm input[type="datetime-local"],
+.myForm input[type="date"],
 .myForm select,
 .myForm textarea {
 display: block;
@@ -91,12 +91,12 @@ width: 100%;
 border: 2px solid  #febb11;
 font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 font-size: 1.2em;
-padding: 0.7em;
+padding: 0.4em;
 box-align: center;
 }
 
 .myForm textarea {
-height: 100px;
+
 }
 
 .myForm button {
@@ -131,23 +131,23 @@ input[type=num]:focus {
 <form action="/entrada" method="post" class="myForm">
 
 <p>
-            <label for="produto[descricao]">Descrição do Produto</label>
-            <input name="produto[descricao]" required="required" type="text" placeholder="Batata Chips LAYS" />
+            <label for="produto[descricao]">Nome do Produto</label>
+            <input name="descricao" required="required" type="text" placeholder="Batata Chips LAYS" />
 </p>
 
 <p>
             <label for="produto[codigo]">Código do Produto</label>
-            <input name="produto[codigo]" required="required" type="num" placeholder="0001" />
+            <input name="codigo" required="required" type="num" placeholder="0001" />
 </p>
 
 <p>
             <label for="produto[quantidade]">Quantidade</label>
-            <input name="produto[quantidade]" required="required" type="num" placeholder="500" />
+            <input name="quantidade" required="required" type="num" placeholder="500" />
 </p>
 
 <p>
 <label>Lote
-<select id="pickup_place" name="produto[lote]">
+<select id="pickup_place" name="lote">
 <option value="1" >Lote 01 - 2019</option>
 <option value="2" >Lote 02 - 2019</option>
 <option value="3" >Lote 03 - 2019</option>
@@ -159,11 +159,12 @@ input[type=num]:focus {
 
 <p>
 <label>Data de Vencimento</label>
-<input type="datetime-local" name="produto[vencimento]">
+<input type="date" name="vencimento">
 </p>
 
 
 <p><button type="submit">Cadastrar</button></p>
+
 
 </form>
 </div>

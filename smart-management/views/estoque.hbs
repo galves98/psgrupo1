@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CPE - Consultoria em Projetos de Estoque</title>
 <link rel="stylesheets" href="style.sass">
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -9,7 +10,7 @@
   <div class="menu-bar">
 <ul>
   <li><a href="home"><i class="fas fa-columns"></i>  Home</a></li>
-  <li class="active"><a href="estoque"><i class="fas fa-cubes"></i>  Estoque</a>
+  <li class="active"><a href="allProducts"><i class="fas fa-cubes"></i>  Estoque</a>
     <div class="sub-menu-1">
       <ul>
           <li><a href="saida">Saida</a></li>
@@ -25,7 +26,37 @@
 </body>
 </html>
 </script>
+<head>
+<style>
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
 
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:nth-child(odd){background-color: lightgray;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #febb11;
+  color:black;
+}
+
+h2{
+  color:antiquewhite;
+}
+</style>
+</head>
 
 <body>
 
@@ -33,72 +64,59 @@
 
    	<div id="top" class="row">
   		<div class="col-sm-3">
-  			<h2>Itens</h2>
+  			<h2>Produtos</h2>
   		</div>
   		<div class="col-sm-6">
 
   			<div class="input-group h2">
-  				<input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar Itens">
-  				<span class="input-group-btn">
-  					<button type="button" class="btn btn-dark">Buscar</button>
-  				</span>
+  				<input class="form-control" id="myInput" type="text" onkeyup="myFunction()" placeholder="Search..">
+  				
   			</div>
 
   		</div>
-  	</div> <!-- /#top -->
+  	</div> 
+    <br>
+    <br>
+  <table id="customers">
+    <tr>
+      <th>Codigo</th>
+      <th>Descricao</th> 
+      <th>Quantidade</th>
+      <th>Lote</th>
+      <th>Vencimento</th>
+    </tr>
+      {{#each product}}
+      <tr>
+         <td>{{codigo}}</td>
+         <td>{{descricao}}</td>
+         <td>{{quantidade}}</td>
+         <td>{{lote}}</td>
+         <td>{{vencimento}}</td>
+      </tr>
+      {{/each}}
+  </table>
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("customers");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
 
-
-   	<hr />
-   	<div id="list" class="row">
-
-  	<div class="table-responsive col-md-12">
-  		<table class="table table-striped" cellspacing="0" cellpadding="0">
-  			<thead>
-  				<tr>
-  					<th>Código</th>
-  					<th>Descrição</th>
-  					<th>Quantidade</th>
-            <th>Lote</th>
-  					<th>Data de Vencimento</th>
-  					<th class="actions">Ações</th>
-  				</tr>
-  			</thead>
-  			<tbody>
-  				<tr>
-  					<td>001</td>
-  					<td>Batata Chips LAYS</td>
-  					<td>500</td>
-            <td>Lote 01 - 2019</td>
-  					<td>01/01/2015</td>
-  					<td class="actions">
-  						<a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-  					</td>
-  				</tr>
-          <tr>
-  					<td>002</td>
-  					<td>Vassoura CONDOR</td>
-  					<td>30</td>
-            <td>Lote 02 - 2019</td>
-  					<td>05/12/2019</td>
-  					<td class="actions">
-  						<a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-  					</td>
-  				</tr>
-          <tr>
-  					<td>003</td>
-  					<td>Pack 12 HEINEKEN</td>
-  					<td>300</td>
-            <td>Lote 04 - 2019</td>
-  					<td>01/01/2020</td>
-  					<td class="actions">
-  						<a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-  					</td>
-  				</tr>
-  			</tbody>
-  		</table>
-  	</div>
-
-  	</div> <!-- /#list -->
+<br>
 
     <nav aria-label="Navegação de página exemplo">
       <ul class="pagination">
@@ -109,8 +127,8 @@
         <li class="page-item"><a class="page-link" href="#">Próximo</a></li>
       </ul>
     </nav>
-  	</div> <!-- /#bottom -->
-   </div> <!-- /#main -->
+  	</div> 
+   </div> 
 
 
    <script src="js/jquery.min.js"></script>
@@ -118,4 +136,106 @@
   </body>
   </html>
 
+</body>-->
+
+<!--
+<html>
+<head>
+  <title>Add Edit Delete Table Row Example using JQuery - ItSolutionStuff.com</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+</head>
+<body>
+    
+<div class="container">
+  <h1>Add Edit Delete Table Row Example using JQuery - ItSolutionStuff.com</h1>
+    
+  <form>
+        
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" name="name" class="form-control" value="Paresh" required="">
+    </div>
+    
+    <div class="form-group">
+      <label>Email:</label>
+      <input type="text" name="email" class="form-control" value="paresh@gmail.com" required="">
+    </div>
+   
+    <button type="submit" class="btn btn-success save-btn">Save</button>
+    
+  </form>
+  <br/>
+  <table class="table table-bordered data-table">
+    <thead>
+      <th>Name</th>
+      <th>Email</th>
+      <th width="200px">Action</th>
+    </thead>
+    <tbody>
+    
+    </tbody>
+  </table>
+   
+</div>
+    
+<script type="text/javascript">
+   
+    $("form").submit(function(e){
+        e.preventDefault();
+        var name = $("input[name='name']").val();
+        var email = $("input[name='email']").val();
+     
+        $(".data-table tbody").append("<tr data-name='"+name+"' data-email='"+email+"'><td>"+name+"</td><td>"+email+"</td><td><button class='btn btn-info btn-xs btn-edit'>Edit</button><button class='btn btn-danger btn-xs btn-delete'>Delete</button></td></tr>");
+    
+        $("input[name='name']").val('');
+        $("input[name='email']").val('');
+    });
+   
+    $("body").on("click", ".btn-delete", function(){
+        $(this).parents("tr").remove();
+    });
+    
+    $("body").on("click", ".btn-edit", function(){
+        var name = $(this).parents("tr").attr('data-name');
+        var email = $(this).parents("tr").attr('data-email');
+    
+        $(this).parents("tr").find("td:eq(0)").html('<input name="edit_name" value="'+name+'">');
+        $(this).parents("tr").find("td:eq(1)").html('<input name="edit_email" value="'+email+'">');
+    
+        $(this).parents("tr").find("td:eq(2)").prepend("<button class='btn btn-info btn-xs btn-update'>Update</button><button class='btn btn-warning btn-xs btn-cancel'>Cancel</button>")
+        $(this).hide();
+    });
+   
+    $("body").on("click", ".btn-cancel", function(){
+        var name = $(this).parents("tr").attr('data-name');
+        var email = $(this).parents("tr").attr('data-email');
+    
+        $(this).parents("tr").find("td:eq(0)").text(name);
+        $(this).parents("tr").find("td:eq(1)").text(email);
+   
+        $(this).parents("tr").find(".btn-edit").show();
+        $(this).parents("tr").find(".btn-update").remove();
+        $(this).parents("tr").find(".btn-cancel").remove();
+    });
+   
+    $("body").on("click", ".btn-update", function(){
+        var name = $(this).parents("tr").find("input[name='edit_name']").val();
+        var email = $(this).parents("tr").find("input[name='edit_email']").val();
+    
+        $(this).parents("tr").find("td:eq(0)").text(name);
+        $(this).parents("tr").find("td:eq(1)").text(email);
+     
+        $(this).parents("tr").attr('data-name', name);
+        $(this).parents("tr").attr('data-email', email);
+    
+        $(this).parents("tr").find(".btn-edit").show();
+        $(this).parents("tr").find(".btn-cancel").remove();
+        $(this).parents("tr").find(".btn-update").remove();
+    });
+    
+</script>
+     
 </body>
+</html>
+-->
