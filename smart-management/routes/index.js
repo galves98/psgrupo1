@@ -2,9 +2,21 @@ var express = require('express');
 var router = express.Router();
 var firebase = require('firebase');
 var Product = require('../models/product');
+//Garante que o usuario está logado para ter acesso à pagina
+function ensureAuthenticated (req,res,next){
+	firebase.auth().onAuthStateChanged(function(user) {
+	  if (user) {
+	    // User is signed in.
+			return next();
+	  } else {
+			// No user is signed in.
+		res.redirect("/");
+	}
+	});
+};
 
 //  ESTOQUE
-router.get('/estoque', function(req, res, next) {
+router.get('/estoque',ensureAuthenticated, function(req, res, next) {
 	Product.todosProdutos()
 		.then((product) => {
 			console.log(product);
@@ -15,18 +27,53 @@ router.get('/estoque', function(req, res, next) {
 		});
 });
 
+//FUNCAO SIGOUT DO USUARIO
+router.get('/signout', function(req, res, next) {
+	firebase.auth().signOut().then(function() {
+		res.redirect("/");
+		// Sign-out successful.
+	}).catch(function(error) {
+		// An error happened
+	});
+});
+
+//NEWPASSWORD
+router.get('/newpassword', function(req, res, next) {
+	res.render('newpassword', { title: 'NOVA SENHA' });
+});
+router.post('/newpassword', function(req, res, next) {
+	//Pega email e enviar solicitação de nova senha
+
+	console.log(req.body.usuario.email);
+	const usuario = {
+		email: req.body.usuario.email,
+	};
+	firebase
+		.auth()
+		.sendPasswordResetEmail(usuario.email)
+		.then((firebase) => {
+			res.redirect('/'); //Se entrar aqui, é porque email foi enviado
+			//window.alert("Cadastrado com sucesso");
+			console.log('Email enviado com sucesso');
+		})
+		.catch((error) => {
+			//Caso nao enviar
+			console.log(error);
+		});
+});
+
 // TESTE-MONGO
-router.get('/teste-mongo', function(req, res, next) {
+router.get('/teste-mongo',ensureAuthenticated, function(req, res, next) {
 	res.render('teste-mongo', { title: 'TESTE MONGO' });
 });
 
 // PRODUCTS
-router.get('/product', (req, res, next) => {
+router.get('/product',ensureAuthenticated, (req, res, next) => {
 	res.render('product', { title: 'Product' });
 });
 
 // CADASTRO
-router.get('/cadastro', function(req, res, next) {
+router.get('/cadastro',ensureAuthenticated, function(req, res, next) {
 	//Pega formulário de cadastro e joga para o FireBase
 	res.render('cadastro', { title: 'Express' });
 });
@@ -56,6 +103,7 @@ router.get('/', function(req, res, next) {
 });
 router.post('/', function(req, res, next) {
 	//Pega formulário de Login e valida no Firebase
+
 	console.log(req.body.usuario.email);
 	const usuario = {
 		email: req.body.usuario.email,
@@ -76,8 +124,9 @@ router.post('/', function(req, res, next) {
 		});
 });
 
+
 //ENTRADA
-router.get('/entrada', function(req, res, next) {
+router.get('/entrada',ensureAuthenticated, function(req, res, next) {
 	res.render('entrada', { title: 'ENTRADA' });
 });
 
@@ -101,7 +150,7 @@ router.post('/entrada', function(req, res, next) {
 });
 
 //SAIDA
-router.get('/saida', function(req, res, next) {
+router.get('/saida',ensureAuthenticated, function(req, res, next) {
 	res.render('saida', { title: 'SAIDA' });
 });
 
@@ -120,7 +169,7 @@ router.post('/saida', function(req, res, next) {
 });
 
 //HOME
-router.get('/home', function(req, res, next) {
+router.get('/home',ensureAuthenticated, function(req, res, next) {
 	res.render('home', { title: 'HOME' });
 	Product.produtosVencendo();
 	Product.lotesAcabando();
@@ -130,7 +179,7 @@ router.get('/home', function(req, res, next) {
 router.post('/home', function(req, res, next) {});
 
 //ALL PRODUCTS
-router.get('/allProducts', function(req, res, next) {
+router.get('/allProducts',ensureAuthenticated, function(req, res, next) {
 	res.render('allProducts', { title: 'ALLPRODUCTS' });
 	Product.todosProdutos();
 });
