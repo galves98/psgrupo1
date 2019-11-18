@@ -52,7 +52,7 @@ img.avatar {
 
 .container {
   padding: 9px;
- 
+
 }
 
 span.psw {
@@ -85,7 +85,7 @@ body {
 }
 #form_login {
    display: table-cell;
-   
+
    vertical-align: middle;
 }
 
@@ -102,10 +102,9 @@ body {
 </style>
 </head>
 
-<body>
-
+<body>s
 <div id="parent">
-  
+
   <form action="/" method="post">
   <div class="imgcontainer">
     <img src="https://www.gestaomais.net.br/javax.faces.resource/avatarV01.png.jsf?ln=imagens" alt="Avatar" class="avatar">
@@ -118,20 +117,18 @@ body {
 
     <label for="psw"><b>Senha</b></label>
     <input type="password" placeholder="123456" name="usuario[senha]" >
-        
+
     <button type="submit">Entrar</button>
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Lembrar-me
-    </label>
+
   </div>
 
   <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Esqueci a senha!</button>
-  
+    <button onclick="window.location.href='/newpassword'" type="button" class="cancelbtn">Esqueci a senha!</button>
+
   </div>
 </form>
 
 </div>
-
+<script src="app.js"></script>
 </body>
 </html>
