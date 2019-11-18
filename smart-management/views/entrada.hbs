@@ -164,9 +164,13 @@ input[type=num]:focus {
 </p>
 
 
-<p><button type="submit">Cadastrar</button></p>
+<p><button type="submit" onclick="myFunction()">Cadastrar</button></p>
 
-
+<script>
+function myFunction() {
+  confirm("Confirmar cadastro?");
+}
+</script>
 </form>
 </div>
 </body>

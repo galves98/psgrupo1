@@ -136,8 +136,12 @@ cursor: pointer;
 </p>
 
 
-<p><button type="submit">Remover</button></p>
-
+<p><button type="submit" onclick="myFunction()">Remover</button></p>
+<script>
+function myFunction() {
+  confirm("Confirmar retirada?");
+}
+</script>
 </form>
 </div>
 </body>
