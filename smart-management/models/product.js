@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const productSchema = new mongoose.Schema(
 	{
 		descricao: {
@@ -66,8 +67,6 @@ class Product {
 			ProductModel.find({ vencimento: { $lt: new Date('2019-12-12') } }, { _id: 0 }, { sort: { vencimento: 1 } })
 				.then((result) => {
 					resolve(result);
-					console.log('produtos vencendo:');
-					console.log(result);
 				})
 				.catch((error) => {
 					reject(error);
@@ -81,8 +80,6 @@ class Product {
 			ProductModel.find({ quantidade: { $lt: 100 } }, { _id: 0 })
 				.then((result) => {
 					resolve(result);
-					console.log('lotes acabando:');
-					console.log(result);
 				})
 				.catch((error) => {
 					reject(error);
@@ -96,8 +93,6 @@ class Product {
 			ProductModel.find({ updatedAt: { $lt: new Date('2019-12-12') } }, { _id: 0 }, { sort: { updatedAt: -1 } })
 				.then((result) => {
 					resolve(result);
-					console.log('retirados recentemente:');
-					console.log(result);
 				})
 				.catch((error) => {
 					reject(error);
@@ -108,13 +103,9 @@ class Product {
 
 	static todosProdutos() {
 		return new Promise((resolve, reject) => {
-			ProductModel.find({})
-				.then((results) => {
+			ProductModel.find({}).then((results) => {
 					resolve(results);
-					console.log('todos os produtos:');
-					console.log(results);
-				})
-				.catch((error) => {
+				}).catch((error) => {
 					reject(error);
 					console.log(error);
 				});

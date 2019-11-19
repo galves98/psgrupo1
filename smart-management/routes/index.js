@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var firebase = require('firebase');
 var Product = require('../models/product');
+
+
+
 //Garante que o usuario está logado para ter acesso à pagina
 function ensureAuthenticated (req,res,next){
 	firebase.auth().onAuthStateChanged(function(user) {
@@ -136,7 +139,7 @@ router.post('/entrada', function(req, res, next) {
 		codigo: req.body.codigo,
 		quantidade: req.body.quantidade,
 		lote: req.body.lote,
-		vencimento: Date(req.body.vencimento)
+		vencimento: req.body.vencimento,
 	};
 	Product.createNew(NovoProduto)
 		.then((result) => {
