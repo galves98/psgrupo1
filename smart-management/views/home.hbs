@@ -4,15 +4,15 @@
   <title>CPE - Consultoria em Projetos de Estoque</title>
 <link rel="stylesheets" href="style.sass">
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-
 </head>
 <body>
   <div class="menu-bar">
 <ul>
-  <li class="active"><a href="home"><i class="fas fa-columns"></i>  Home</a></li>
-  <li><a href="estoque"><i class="fas fa-cubes"></i>  Estoque</a>
+  <li><a href="home"><i class="fas fa-columns"></i>  Home</a></li>
+  <li class="active"><a><i class="fas fa-cubes"></i>  Estoque</a>
     <div class="sub-menu-1">
       <ul>
+          <li><a href="estoque">Dashboard</a></li>
           <li><a href="saida">Saida</a></li>
           <li><a href="entrada">Entrada</a></li>
       </ul>
@@ -21,20 +21,49 @@
 
   </li>
   <li><a href="cadastro"><i class="fas fa-users"></i></i>  Cadastro</a></li>
+<<<<<<< HEAD
     <li><a href="signout"><i class="fas fa-users"></i></i>  Sair</button></li>
+=======
+  <li><a href="signout"><i class="fas fa-users"></i></i>  Sign Out</a></li>
+>>>>>>> home_funcional
 </ul>
 </div>
 </body>
 </html>
 </script>
-<style>
 
-  h2 {
-  position: absolute;
-  left: 8.3%;
-  top:20%;
-  color:white;
-  font-size: 30px;}
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+</head>
+<style>
+ #customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  text-decoration: none;
+}
+
+#customers td, #customers th {
+  border: 3px solid #febb11;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:nth-child(odd){background-color: lightgray;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #febb11;
+  color:black;
+}
+
+
 
   h3{
   text-align: center;
@@ -42,13 +71,17 @@
   top:20%;
   position: fixed;
   left: 42.8%;
+  
+  }
+
+
+  h2{
+  background-color: #febb11;
+color: black;
   }
 
   h4 {
-  position: absolute;
-  right:6.4%;
-  top:20%;
-  color:white;
+  background-color: #febb11;
   font-size: 30px;
   }
 
@@ -70,6 +103,7 @@
   left: 3.5%;
   top:18%;
   border: 3px solid #febb11;
+  
 }
 
 
@@ -95,8 +129,10 @@
 .listavencendo{
   width: 400px;
   position:fixed;
-  left:3.5%;
+  left:36.5%;
   top:28%;
+  color:black;
+  
 }
 
 .listaacabando{
@@ -108,27 +144,37 @@
 .listaretirados{
   width: 400px;
   position:fixed;
-  right:3.5%;
-  top:28%;
+  left:36.5%;
+  top:65%;
 }
 .list-group-item{
   background-color: transparent;
   color: white;
 }
+table table { display:inline-block;vertical-align:top; }
+
+
 </style>
 <html>
 <body>
 
-<br></br>
-<br></br>
-<br></br>
 
+<<<<<<< HEAD
   <div class="div2"></div>
   <h2>{{diffDays}}  </h2>
   <div class="listavencendo">
   <table id="customers">
       {{#each quaseVencidos}}
       <tr href="#" class="list-group-item list-group-item-action">
+=======
+
+<div id="main" class="container-fluid" style="margin-top: 50px">
+  <h2 class="headertekst">Produtos vencendo</h2>
+  <div >
+  <table id="customers">
+      {{#each vencendo}}
+      <tr>
+>>>>>>> home_funcional
          <td>{{codigo}}</td>
          <td>{{descricao}}</td>
          <td>{{diavencimento}}/{{mesvencimento}}/{{anovencimento}}</td>
@@ -137,23 +183,17 @@
       {{/each}}
 
   </table>
-
+</div>
 </div>
 
 
-  <div class="div3"></div>
-  <h3>Lotes acabando</h3>
-  <div class="listaacabando">
-  <a href="#" class="list-group-item list-group-item-action">Lote 1</a>
-  <a href="#" class="list-group-item list-group-item-action">Lote 2</a>
-</div>
 
-  <div class="div4"></div>
-  <h4>Retirados recentemente</h4>
-  <div class="listaretirados">
+<div id="main" class="container-fluid" style="margin-top: 50px">
+  <h4 class="headertekst">Retirados recentemente</h4>
+  <div >
     <table id="customers">
       {{#each recentes}}
-      <tr href="#" class="list-group-item list-group-item-action">
+      <tr >
          <td>{{codigo}}</td>
          <td>{{descricao}}</td>
          <td>{{ultimaRetirada}}</td>
@@ -161,6 +201,62 @@
       {{/each}}
   </table>
 </div>
+</div>
+   <script src="js/jquery.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+
+   
+   <script src="js/jquery.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+<!--
+
+
+<td>{{ultimaRetirada}}</td>
+
+
+
+
+
+
+
+
+
+  <div></div>
+  <h2>Produtos vencendo</h2>
+  <div class="listavencendo">
+  <table id="customers">
+      {{#each vencendo}}
+      <tr>
+         <td>{{codigo}}</td>
+         <td>{{descricao}}</td>
+         <td>{{vencimento}}</td>
+      </tr>
+      {{/each}}
+  </table>
+</div>
+
+  <div class="div3"></div>
+  <h3>Lotes acabando</h3>
+  <div class="listaacabando">
+  <a  class="list-group-item list-group-item-action">Lote 1</a>
+  <a  class="list-group-item list-group-item-action">Lote 2</a>
+</div>
+
+  <div class="div4"></div>
+  <h4>Retirados recentemente</h4>
+  <div class="listaretirados">
+    <table id="customers">
+      {{#each recentes}}
+      <tr >
+         <td>{{codigo}}</td>
+         <td>{{descricao}}</td>
+         <td>{{ultimaRetirada}}</td>
+      </tr>
+      {{/each}}
+  </table>
+</div>
+   <script src="js/jquery.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/javascripts/signout.js"></script>
 </body>
 </html>

@@ -3,23 +3,21 @@ var router = express.Router();
 var firebase = require('firebase');
 var Product = require('../models/product');
 
-
-
 //Garante que o usuario está logado para ter acesso à pagina
-function ensureAuthenticated (req,res,next){
+function ensureAuthenticated(req, res, next) {
 	firebase.auth().onAuthStateChanged(function(user) {
-	  if (user) {
-	    // User is signed in.
+		if (user) {
+			// User is signed in.
 			return next();
-	  } else {
+		} else {
 			// No user is signed in.
-		res.redirect("/");
-	}
+			res.redirect('/');
+		}
 	});
-};
+}
 
 //  ESTOQUE
-router.get('/estoque',ensureAuthenticated, function(req, res, next) {
+router.get('/estoque', ensureAuthenticated, function(req, res, next) {
 	Product.todosProdutos()
 		.then((product) => {
 			console.log(product);
@@ -32,12 +30,16 @@ router.get('/estoque',ensureAuthenticated, function(req, res, next) {
 
 //FUNCAO SIGOUT DO USUARIO
 router.get('/signout', function(req, res, next) {
-	firebase.auth().signOut().then(function() {
-		res.redirect("/");
-		// Sign-out successful.
-	}).catch(function(error) {
-		// An error happened
-	});
+	firebase
+		.auth()
+		.signOut()
+		.then(function() {
+			res.redirect('/');
+			// Sign-out successful.
+		})
+		.catch(function(error) {
+			// An error happened
+		});
 });
 
 //NEWPASSWORD
@@ -49,7 +51,7 @@ router.post('/newpassword', function(req, res, next) {
 
 	console.log(req.body.usuario.email);
 	const usuario = {
-		email: req.body.usuario.email,
+		email: req.body.usuario.email
 	};
 	firebase
 		.auth()
@@ -66,17 +68,17 @@ router.post('/newpassword', function(req, res, next) {
 });
 
 // TESTE-MONGO
-router.get('/teste-mongo',ensureAuthenticated, function(req, res, next) {
+router.get('/teste-mongo', ensureAuthenticated, function(req, res, next) {
 	res.render('teste-mongo', { title: 'TESTE MONGO' });
 });
 
 // PRODUCTS
-router.get('/product',ensureAuthenticated, (req, res, next) => {
+router.get('/product', ensureAuthenticated, (req, res, next) => {
 	res.render('product', { title: 'Product' });
 });
 
 // CADASTRO
-router.get('/cadastro',ensureAuthenticated, function(req, res, next) {
+router.get('/cadastro', ensureAuthenticated, function(req, res, next) {
 	//Pega formulário de cadastro e joga para o FireBase
 	res.render('cadastro', { title: 'Express' });
 });
@@ -127,22 +129,24 @@ router.post('/', function(req, res, next) {
 		});
 });
 
-
 //ENTRADA
-router.get('/entrada',ensureAuthenticated, function(req, res, next) {
+router.get('/entrada', ensureAuthenticated, function(req, res, next) {
 	res.render('entrada', { title: 'ENTRADA' });
 });
 
 router.post('/entrada', function(req, res, next) {
-
 	const NovoProduto = {
 		descricao: req.body.descricao,
 		codigo: req.body.codigo,
 		quantidade: req.body.quantidade,
 		lote: req.body.lote,
+<<<<<<< HEAD
 		diavencimento: req.body.diavencimento,
 		mesvencimento: req.body.mesvencimento,
 		anovencimento: req.body.anovencimento,
+=======
+		vencimento: req.body.vencimento
+>>>>>>> home_funcional
 	};
 	Product.createNew(NovoProduto)
 		.then((result) => {
@@ -156,9 +160,13 @@ router.post('/entrada', function(req, res, next) {
 });
 
 //SAIDA
+<<<<<<< HEAD
 
 //SAIDA
 router.get('/saida',ensureAuthenticated, function(req, res, next) {
+=======
+router.get('/saida', ensureAuthenticated, function(req, res, next) {
+>>>>>>> home_funcional
 	res.render('saida', { title: 'SAIDA' });
 });
 
@@ -170,6 +178,7 @@ router.post('/saida', function(req, res, next) {
 });
 
 //HOME
+<<<<<<< HEAD
 router.get('/home', function(req, res, next) {
 
 
@@ -196,13 +205,22 @@ router.get('/home', function(req, res, next) {
 				}
 					res.render('home', { title: 'HOME', quaseVencidos });
 })
+=======
+router.get('/home', ensureAuthenticated, function(req, res, next) {
+	Product.produtosVencendo().then((vencendo) => {
+		Product.retiradosRecente().then((recentes) => {
+			res.render('home', { title: 'home', vencendo, recentes });
+		});
+	});
+	Product.lotesAcabando();
+>>>>>>> home_funcional
 });
 
 
 router.post('/home', function(req, res, next) {});
 
 //ALL PRODUCTS
-router.get('/allProducts',ensureAuthenticated, function(req, res, next) {
+router.get('/allProducts', ensureAuthenticated, function(req, res, next) {
 	res.render('allProducts', { title: 'ALLPRODUCTS' });
 	Product.todosProdutos();
 });
