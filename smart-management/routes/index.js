@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var firebase = require('firebase');
 var Product = require('../models/product');
+
+
+
 //Garante que o usuario está logado para ter acesso à pagina
 function ensureAuthenticated (req,res,next){
 	firebase.auth().onAuthStateChanged(function(user) {
@@ -131,12 +134,13 @@ router.get('/entrada',ensureAuthenticated, function(req, res, next) {
 });
 
 router.post('/entrada', function(req, res, next) {
+
 	const NovoProduto = {
 		descricao: req.body.descricao,
 		codigo: req.body.codigo,
 		quantidade: req.body.quantidade,
 		lote: req.body.lote,
-		vencimento: Date(req.body.vencimento)
+		vencimento: req.body.vencimento,
 	};
 	Product.createNew(NovoProduto)
 		.then((result) => {
@@ -159,21 +163,22 @@ router.post('/saida', function(req, res, next) {
 	const quantidade = req.body.quantidade;
 	Product.remover(codigo, quantidade)
 		.then((results) => {
-			console.log(results);
-			console.log('produto removido com sucesso!');
-			res.redirect('/saida');
+			res.render('saida');
 		})
 		.catch((error) => {
+			res.render('saida');
 			console.log(error);
 		});
 });
 
 //HOME
 router.get('/home',ensureAuthenticated, function(req, res, next) {
-	res.render('home', { title: 'HOME' });
-	Product.produtosVencendo();
+	Product.produtosVencendo().then(vencendo=>{
+		Product.retiradosRecente().then(recentes=>{
+			res.render('home', { title: 'home', vencendo, recentes });
+		});
+	});
 	Product.lotesAcabando();
-	Product.retiradosRecente();
 });
 
 router.post('/home', function(req, res, next) {});
