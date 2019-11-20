@@ -4,6 +4,7 @@
   <title>CPE - Consultoria em Projetos de Estoque</title>
 <link rel="stylesheets" href="style.sass">
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
 </head>
 <body>
   <div class="menu-bar">
@@ -123,10 +124,20 @@
 <br></br>
 
   <div class="div2"></div>
-  <h2>Produtos vencendo</h2>
+  <h2>{{diffDays}}  </h2>
   <div class="listavencendo">
-  <a href="#" class="list-group-item list-group-item-action">LAYS</a>
-  <a href="#" class="list-group-item list-group-item-action">Pack 12 HEINEKEN</a>
+  <table id="customers">
+      {{#each quaseVencidos}}
+      <tr href="#" class="list-group-item list-group-item-action">
+         <td>{{codigo}}</td>
+         <td>{{descricao}}</td>
+         <td>{{diavencimento}}/{{mesvencimento}}/{{anovencimento}}</td>
+
+      </tr>
+      {{/each}}
+
+  </table>
+
 </div>
 
 
@@ -140,8 +151,15 @@
   <div class="div4"></div>
   <h4>Retirados recentemente</h4>
   <div class="listaretirados">
-    <a href="#" class="list-group-item list-group-item-action">Batata LAYS</a>
-    <a href="#" class="list-group-item list-group-item-action">Pack 12 HEINEKEN</a>
+    <table id="customers">
+      {{#each recentes}}
+      <tr href="#" class="list-group-item list-group-item-action">
+         <td>{{codigo}}</td>
+         <td>{{descricao}}</td>
+         <td>{{ultimaRetirada}}</td>
+      </tr>
+      {{/each}}
+  </table>
 </div>
 <script type="text/javascript" src="/javascripts/signout.js"></script>
 </body>
