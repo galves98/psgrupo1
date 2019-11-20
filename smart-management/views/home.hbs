@@ -124,16 +124,18 @@
 <br></br>
 
   <div class="div2"></div>
-  <h2>Produtos vencendo</h2>
+  <h2>{{diffDays}}  </h2>
   <div class="listavencendo">
   <table id="customers">
-      {{#each vencendo}}
+      {{#each quaseVencidos}}
       <tr href="#" class="list-group-item list-group-item-action">
          <td>{{codigo}}</td>
          <td>{{descricao}}</td>
-         <td>{{vencimento}}</td>
+         <td>{{diavencimento}}/{{mesvencimento}}/{{anovencimento}}</td>
+
       </tr>
       {{/each}}
+
   </table>
 
 </div>
