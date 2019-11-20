@@ -140,13 +140,9 @@ router.post('/entrada', function(req, res, next) {
 		codigo: req.body.codigo,
 		quantidade: req.body.quantidade,
 		lote: req.body.lote,
-<<<<<<< HEAD
 		diavencimento: req.body.diavencimento,
 		mesvencimento: req.body.mesvencimento,
 		anovencimento: req.body.anovencimento,
-=======
-		vencimento: req.body.vencimento
->>>>>>> home_funcional
 	};
 	Product.createNew(NovoProduto)
 		.then((result) => {
@@ -160,13 +156,7 @@ router.post('/entrada', function(req, res, next) {
 });
 
 //SAIDA
-<<<<<<< HEAD
-
-//SAIDA
 router.get('/saida',ensureAuthenticated, function(req, res, next) {
-=======
-router.get('/saida', ensureAuthenticated, function(req, res, next) {
->>>>>>> home_funcional
 	res.render('saida', { title: 'SAIDA' });
 });
 
@@ -178,42 +168,13 @@ router.post('/saida', function(req, res, next) {
 });
 
 //HOME
-<<<<<<< HEAD
-router.get('/home', function(req, res, next) {
-
-
-	Product.todosProdutos().then((vencendo)=>{
-		var today = new Date();
-		var quaseVencidos = new Array;
-		var n=0;
-		var dd = String(today.getDate()).padStart(2, '0');
-		    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-		    var yyyy = today.getFullYear();
-		    var oneDay = 24*60*60*1000;
-				console.log(vencendo);
-		    for (var i = 0; i < vencendo.length; i++) {
-		      var firstDate = new Date(yyyy,mm,dd);
-		      var secondDate = new Date(vencendo[i].anovencimento,vencendo[i].mesvencimento,vencendo[i].diavencimento);
-		      var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
-					console.log("---------------------------------------------------");
-			//		console.log(vencendo[i].anovencimento);
-					console.log(diffDays);
-					if (diffDays < 31){
-						quaseVencidos[n] = vencendo[i]
-						n++;
-					}
-				}
-					res.render('home', { title: 'HOME', quaseVencidos });
-})
-=======
-router.get('/home', ensureAuthenticated, function(req, res, next) {
-	Product.produtosVencendo().then((vencendo) => {
-		Product.retiradosRecente().then((recentes) => {
+router.get('/home',ensureAuthenticated, function(req, res, next) {
+	Product.produtosVencendo().then(vencendo=>{
+		Product.retiradosRecente().then(recentes=>{
 			res.render('home', { title: 'home', vencendo, recentes });
 		});
 	});
 	Product.lotesAcabando();
->>>>>>> home_funcional
 });
 
 
