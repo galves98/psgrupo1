@@ -8,8 +8,8 @@
 <body>
   <div class="menu-bar">
 <ul>
-  <li><a href="home"><i class="fas fa-columns"></i>  Home</a></li>
-  <li class="active"><a><i class="fas fa-cubes"></i>  Estoque</a>
+  <li class="active"><a href="home"><i class="fas fa-columns"></i>  Home</a></li>
+  <li><a><i class="fas fa-cubes"></i>  Estoque</a>
     <div class="sub-menu-1">
       <ul>
           <li><a href="estoque">Dashboard</a></li>
@@ -160,11 +160,12 @@ table table { display:inline-block;vertical-align:top; }
   <h2 class="headertekst">Produtos vencendo</h2>
   <div >
   <table id="customers">
-      {{#each vencendo}}
-      <tr>
+      {{#each quaseVencidos}}
+      <tr >
          <td>{{codigo}}</td>
          <td>{{descricao}}</td>
-         <td>{{vencimento}}</td>
+         <td>{{diavencimento}}/{{mesvencimento}}/{{anovencimento}}</td>
+
       </tr>
       {{/each}}
   </table>

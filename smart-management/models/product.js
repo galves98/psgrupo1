@@ -20,8 +20,16 @@ const productSchema = new mongoose.Schema(
 			type: Number,
 			required: true
 		},
-		vencimento: {
-			type: Date,
+		diavencimento: {
+			type: Number,
+			required: true
+		},
+		mesvencimento: {
+			type: Number,
+			required: true
+		},
+		anovencimento: {
+			type: Number,
 			required: true
 		},
 		ultimaRetirada: {
@@ -32,7 +40,7 @@ const productSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-const ProductModel = mongoose.model('ProductArtLima', productSchema);
+const ProductModel = mongoose.model('ProductosOficial', productSchema);
 
 class Product {
 	static createNew(product) {
@@ -47,27 +55,67 @@ class Product {
 		});
 	}
 
+	//	static (codigo, quantidade) {
+	//		//falta arrumar logica do ficar negativo
+	//		const quant = ProductModel.findOne({codigo: codigo}, {quantidade:1});
+	//		console.log(quant);
+	//	if (quant<quantidade){
+	//		return new Promise((result, reject) => {
+	//			ProductModel.findOneAndUpdate(
+	//				{ codigo: codigo },
+	//				{ $inc: { quantidade: -quantidade }, $set: {ultimaRetirada: quantidade}},
+	//				{ new: true, runValidators: true }
+	//			)
+	//				.then((doc) => {
+	//					//console.log(doc);
+	//				})
+	//				.catch((err) => {
+	//					console.error(err);
+	//				});
+	//		});
+	//}
+	//else{
+	//	console.log("entrouaqui");
+	//}
+	//}
+
 	static remover(codigo, quantidade) {
 		//falta arrumar logica do ficar negativo
-		return new Promise((result, reject) => {
-			ProductModel.findOneAndUpdate(
-				{ codigo: codigo },
-				{ $inc: { quantidade: -quantidade }, $set: {ultimaRetirada: quantidade}},
-				{ new: true, runValidators: true }
-			)
-				.then((doc) => {
-					console.log(doc);
-				})
-				.catch((err) => {
-					console.error(err);
+		var quant;
+		ProductModel.findOne({ codigo: codigo }).then((produto) => {
+			quant = produto.quantidade;
+			console.log('PRoduto que queremos: ');
+			console.log(produto);
+			console.log('Quant: ');
+			console.log(quant);
+			console.log('Quantidade: ');
+			console.log(quantidade);
+
+			if (quant > quantidade) {
+				return new Promise((resolve, reject) => {
+					ProductModel.findOneAndUpdate(
+						{ codigo: codigo },
+						{ $inc: { quantidade: -quantidade }, $set: { ultimaRetirada: quantidade } },
+						{ new: true, runValidators: true }
+					)
+						.then((doc) => {
+							console.log(doc);
+							resolve(doc);
+						})
+						.catch((err) => {
+							console.error(err);
+							resolve(error);
+						});
 				});
+			} else {
+				console.log('entrouaqui');
+			}
 		});
 	}
-
 	static produtosVencendo() {
 		//mudar data pra 3 meses
 		return new Promise((resolve, reject) => {
-			var date = new Date()
+			var date = new Date();
 			var nextDate = date.getDate() + 30;
 			date.setDate(nextDate);
 			ProductModel.find({ vencimento: { $lt: date } }, { _id: 0 }, { sort: { vencimento: 1 } })
@@ -98,7 +146,7 @@ class Product {
 
 	static retiradosRecente() {
 		return new Promise((resolve, reject) => {
-			var date = new Date()
+			var date = new Date();
 			var nextDate = date.getDate() - 2;
 			date.setDate(nextDate);
 			ProductModel.find({ updatedAt: { $gt: date } }, { _id: 0 }, { sort: { updatedAt: -1 } })
